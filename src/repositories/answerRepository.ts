@@ -11,9 +11,18 @@ export const setAnswer = async (answer: string, questionId: number) => {
 }
 
 export const getAnswersByQuestionId = async (questionId: number) => {
-    const query = await prisma.answers.findMany({
+    const query = await prisma.questions.findMany({
         where: {
-            questionId: questionId
+            id: questionId
+        },
+        select: {
+            id: true,
+            question: true,
+            Answers: {
+                select: {
+                    answer: true
+                }
+            }
         }
     });
     return query;

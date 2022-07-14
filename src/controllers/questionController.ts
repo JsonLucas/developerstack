@@ -32,9 +32,9 @@ export async function get(req: Request, res: Response) {
 }
 
 export async function getById(req: Request, res: Response) {
-  const { questionId } = res.locals;
+  const { id } = req.params;
   try{
-    const answers = await answerService.getAnswersByQuestionId(questionId);
+    const answers = await answerService.getAnswersByQuestionId(Number(id));
     res.status(200).send(answers);
   }catch(e: any){
     throw e;
